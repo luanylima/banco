@@ -1,30 +1,56 @@
-const saldo = 500;
-function depositar(a, b){
+let saldo = 500.00;
+//let saldo_novo = Number( document.getElementById( "inputValue" ).value );
+
+function atualizarTela() {
+    document.getElementById("txtSaldo").innerText = `R$ ${saldo.toFixed(2)}`;
+}
+
+function depositar(){
     let deposito = Number( document.getElementById( "inputValue" ).value );
-    let saldo_novo = Number( document.getElementById( "inputValue" ).value );
+   
+    console.log(deposito);
+    
+    saldo = deposito + saldo;
 
-    saldo_novo = deposito + saldo;
+    console.log(saldo);
 
-    console.log(saldo_novo);
-
-    document.getElementById( "txtSaldo" ).innerHTML = "R$ " + saldo_novo;
-}
-
-function sacar(a, b){
-   let saque = Number( document.getElementById( "inputValue" ).value );
-    let saldo_novo = Number( document.getElementById( "inputValue" ).value );
-
-    saldo_novo = saldo - saque;
-
-    console.log(saldo_novo);
-
-    document.getElementById( "txtSaldo" ).innerHTML = "R$ " + saldo_novo;
-
-    if(saldo_novo < saque){
-        alert("Saldo indisponivel para saque!");
+    if (deposito >= 0){
+        alert("Deposito efetuado com sucesso!");
     }else{
-        alert("Saque efetuado com sucesso!");
+        alert("O deposito não pode menor ou igual a 0");
+        return deposito;
     }
+    atualizarTela(saldo + deposito);
+
+    document.getElementById("inputValue").value = 0;
 }
 
+function sacar(){
+    let saque = Number( document.getElementById( "inputValue" ).value );
+   // let saldo = Number( document.getElementById( "inputValue" ).value );
+    console.log(saque);
+
+    if (saque >= 0){
+        //alert("Saque efetuado com sucesso!");
+    }else{
+        alert("O saque não pode menor ou igual a 0");
+        return saque;
+    }
+    console.log(saldo);
+
+    if (saque <= saldo){
+        alert("Saque efetuado com sucesso!");
+    }else{
+        alert("O saldo é insuficiente");
+        return saldo;
+    }
+
+    saldo = saldo - saque;
+
+    atualizarTela(saldo + saque);
+
+    document.getElementById("inputValue").value = 0;
+
+
+}
 
